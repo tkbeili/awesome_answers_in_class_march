@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AwesomeAnswers</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<% if flash[:notice] || flash[:error] %>
+  <h3><%= flash[:notice] || flash[:error] %></h3>
+<% end %>
+<div class="container">
+  <%= yield %>
+</div>
+
+</body>
+</html>
