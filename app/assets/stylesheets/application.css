@@ -10,6 +10,5 @@
  *
  *= require_self
  *= stub custom_css
- *= require_directory ./abc
  *= require_tree .
  */
