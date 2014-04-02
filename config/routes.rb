@@ -14,12 +14,14 @@ AwesomeAnswers::Application.routes.draw do
   # delete "/questions/:id"      => "questions#destroy"
   
   resources :questions do
+    resources :answers
     member do
       post :vote_up
       post :vote_down
     end
     post :search, on: :collection
   end
+
 
   root "home#index"
 

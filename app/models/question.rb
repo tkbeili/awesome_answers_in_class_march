@@ -6,6 +6,8 @@ class Question < ActiveRecord::Base
 
   default_scope { order("title ASC") }
 
+  has_many :answers, dependent: :destroy
+
   scope :recent, lambda {|x| order("created_at DESC").limit(x) }
   # def self.recent(x)
   #   order("created_at DESC").limit(x)

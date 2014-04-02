@@ -23,6 +23,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @answer = Answer.new
+    @answers = @question.answers.ordered_by_creation
   end
 
   def edit

@@ -7,6 +7,8 @@ gem "thin"
 
 gem "quiet_assets"
 
+gem "haml-rails"
+
 group :development do
   gem "hirb"
   gem "interactive_editor"
