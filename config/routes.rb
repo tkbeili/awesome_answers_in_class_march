@@ -1,6 +1,6 @@
 AwesomeAnswers::Application.routes.draw do
 
-
+  devise_for :users
   get "/about_us" => "home#about"
   get "/faq" => "home#faq"
   get "/help" => "help#index"
@@ -14,14 +14,10 @@ AwesomeAnswers::Application.routes.draw do
   # delete "/questions/:id"      => "questions#destroy"
   
   resources :questions do
+    resources :favorites, only: [:create, :destroy]
+    resources :votes, only: [:create, :update, :destroy]
     resources :answers
-    member do
-      post :vote_up
-      post :vote_down
-    end
-    post :search, on: :collection
   end
-
 
   root "home#index"
 

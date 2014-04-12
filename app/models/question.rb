@@ -6,7 +6,26 @@ class Question < ActiveRecord::Base
 
   default_scope { order("title ASC") }
 
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
+
+  belongs_to :user
+
+  has_many :votes, dependent: :destroy
+  has_many :voted_users, through: :votes, source: :user
+
+  has_many :categorizations, dependent: :destroy
+  has_many :categories, through: :categorizations
+
+  has_one  :question_detail
+  # question.build_question_detail(notes: "asdf")
+  # question.create_question_detail(notes: "Asdf")
+
   has_many :answers, dependent: :destroy
+  # question.answers.build(notes: "asdf")
+  # question.answers.create(notes: "asdf")
+
+  has_many :comments, through: :answers
 
   scope :recent, lambda {|x| order("created_at DESC").limit(x) }
   # def self.recent(x)

@@ -1,0 +1,21 @@
+- if @question.errors.any?
+  %ul
+    - @question.errors.full_messages.each do |message|
+      %li= message
+= form_for @question do |f|
+  = f.label :title, "question title"
+  = f.text_field :title
+  %br/
+  = f.label :description, "question description"
+  = f.text_area :description
+  %br/
+  =# f.collection_check_boxes :category_ids, Category.order("title"), :id, :title 
+
+  = hidden_field_tag "question[category_ids][]", ""
+  - Category.order("title").each do |cat|
+    .row
+      = check_box_tag "question[category_ids][]", cat.id, @question.category_ids.include?(cat.id), id: dom_id(cat)
+      = label_tag dom_id(cat), cat.title
+
+  %br/
+  = f.submit button_label, class: "btn btn-primary"

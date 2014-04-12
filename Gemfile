@@ -9,10 +9,14 @@ gem "quiet_assets"
 
 gem "haml-rails"
 
+gem 'devise'
+
 group :development do
   gem "hirb"
   gem "interactive_editor"
   gem "awesome_print"
+  gem "better_errors"
+  gem "binding_of_caller"
 end
 
 # Use postgresql as the database for Active Record
