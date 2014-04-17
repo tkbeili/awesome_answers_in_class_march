@@ -1,6 +1,9 @@
 AwesomeAnswers::Application.routes.draw do
 
   devise_for :users
+
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
   get "/about_us" => "home#about"
   get "/faq" => "home#faq"
   get "/help" => "help#index"

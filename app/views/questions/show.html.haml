@@ -36,19 +36,10 @@
 %br
 = link_to "All Questions", questions_path
 
-%h2 Add An Answer
-- if @answer.errors.any?
-  %ul
-    - @answer.errors.full_messages.each do |message|
-      %li= message
-/= form_for [@question, @answer] do |f|
-= form_for @answer, url: question_answers_path(@question) do |f|
-  = f.text_area :body
-  %br
-  = f.submit "Submit an answer", class: "btn btn-primary"
+#answer-form= render "answers/form"
 
 %hr
-= render @answers
+.answers= render @answers
 -# @answers.each do |answer|
 -#   = render "/answers/answer", answer: answer
 

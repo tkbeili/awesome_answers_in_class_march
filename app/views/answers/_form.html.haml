@@ -1,0 +1,10 @@
+%h2 Add An Answer
+- if @answer.errors.any?
+  %ul
+    - @answer.errors.full_messages.each do |message|
+      %li= message
+/= form_for [@question, @answer] do |f|
+= form_for [@question, @answer], remote: true do |f|
+  = f.text_area :body
+  %br
+  = f.submit "Submit an answer", class: "btn btn-primary", data: {disable_with: "Saving..."}

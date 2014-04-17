@@ -1,0 +1,6 @@
+$(".answers").prepend("#{j render 'answer', answer: @answer}")
+$("##{dom_id(@answer)}").hide().fadeIn(1000);
+
+- @answer = @question.answers.new
+$("#answer-form").html("#{j render 'form'}");
+$("#answer_body").val("");

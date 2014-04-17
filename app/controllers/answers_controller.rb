@@ -4,19 +4,30 @@ class AnswersController < QuestionsController
   def create
     @answer      = @question.answers.new(answer_attributes)
     @answer.user = current_user
-    if @answer.save
-      redirect_to @question, notice: "Answer created successfully!"
-    else
-      render "/questions/show"
+
+    respond_to do |format|
+      if @answer.save
+        # AnswerMailer.notify_question_owner(@answer).deliver
+        AnswerMailer.delay.notify_question_owner(@answer)
+        format.html { redirect_to @question, notice: "Answer created successfully!" }
+        format.js   { render }
+      else
+        format.html { render "/questions/show" }
+        format.js   { render :new }
+      end
     end
   end
 
   def destroy
     @answer   = @question.answers.find(params[:id])
-    if @answer.user == current_user && @answer.destroy
-      redirect_to @question, notice: "Answer deleted"
-    else
-      redirect_to @question, alert: "We had trouble deleting the answer"
+    respond_to do |format|
+      if @answer.user == current_user && @answer.destroy
+        format.html { redirect_to @question, notice: "Answer deleted"}
+        format.js   { render }
+      else
+        format.html { redirect_to @question, alert: "We had trouble deleting the answer"}
+        format.js   { render } 
+      end
     end
   end
 
