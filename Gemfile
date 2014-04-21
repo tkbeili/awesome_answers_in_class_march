@@ -14,7 +14,11 @@ gem 'devise'
 gem 'delayed_job_active_record'
 gem "delayed_job_web"
 
-gem "faker", group: [:development, :test]
+group :development, :test do
+  gem "faker"
+  gem "rspec-rails"
+  gem "factory_girl_rails"
+end
 
 group :development do
   gem "letter_opener"
@@ -37,7 +41,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
-gem "rails_12factor"
+gem "rails_12factor", group: :production
 
 gem 'bootstrap-sass', '~> 3.1.1.0'
 

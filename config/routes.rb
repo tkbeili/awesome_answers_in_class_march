@@ -22,6 +22,10 @@ AwesomeAnswers::Application.routes.draw do
     resources :answers
   end
 
+  resources :answers, only: [] do
+    resources :comments, only: [:create, :destroy]
+  end
+
   root "home#index"
 
   # The priority is based upon order of creation: first created -> highest priority.
